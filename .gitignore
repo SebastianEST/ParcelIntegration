@@ -23,4 +23,4 @@ Homestead.json
 .phpunit.result.cache
 
 # Custom
-DPDExport/ParcelLabels/*
+DPDExport/ParcelLabels/
