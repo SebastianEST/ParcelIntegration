@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DPDShipment;
+use App\Services\DPDService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Config;
@@ -13,7 +14,6 @@ class DPDController extends Controller
 
     public function CreateShipment(DPDShipment $shipment = null)
     {
-
         $url = "/ws-mapper-rest/createShipment_";
 
         $shipment = new DPDShipment();
@@ -66,8 +66,9 @@ class DPDController extends Controller
         ]);
     }
 
-    public function CreateParcelLabel($id)
+    public function CreateParcelLabel($id = null)
     {
+        $id = "05607104937217";
         $url="/ws-mapper-rest/parcelPrint_";
 
         $response = HTTP::asForm()->post($this->BASE_URL . $url, [
@@ -77,7 +78,8 @@ class DPDController extends Controller
             'printType' => config('DPDConfig.dpd_print_type'),
             'printFormat' => config('DPDConfig.dpd_print_format')
         ]);
-        return $response;
+        DPDService::PrintLabel($id, $response);
+        //return $response;
     }
 
     public function CloseManifest()

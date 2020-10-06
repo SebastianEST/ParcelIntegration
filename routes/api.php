@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/dpd/create', [\App\Http\Controllers\DPDController::class, 'CreateShipment']);
+Route::get('/dpd/createlabel', [\App\Http\Controllers\DPDController::class, 'CreateParcelLabel']);
